@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block div1 %}
+<h1>Grocery Lists</h1>
+<hr>
+{% if titles %}
+      {% for title in titles %}
+          <a href = "../groceryTitle/{{title.groceryListId.id}}">GroceryList Name -- {{title.groceryListId}}</a>
+          <button><a href = "../deleteGroceryTitle/{{title.groceryListId.id}}">Delete</a></button>
+        </br>
+      {% endfor %}
+{% endif %}
+<button><a href = "../../createTitle">Create New List</a></button>
+{% endblock %}
+
+{% block div2 %}
+
+<form action = "../groceryTitle/{{id}}" method="post">
+  {% csrf_token %}
+<h1>Content in Grocery List {{glist}}</h1>
+<hr>
+{% if contents != None %}
+      {% for content in contents %}
+          <p>{{content.item}}
+            <button><a href = "../deleteGroceryContent/{{content.id}}">Delete</a></button>
+          </p>
+      {% endfor %}
+{% endif %}
+
+{{grocerListContentForm.as_p}}
+<button type = "submit">Submit</button>
+<button type = "reset">Reset</button>
+</form>
+
+{% endblock %}

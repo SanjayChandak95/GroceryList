@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block div1 %}
+<h1>Grocery Lists</h1>
+<hr>
+{% endblock %}
+
+{% block div2 %}
+<form action = "." method="post">
+  {% csrf_token %}
+<h1>Delete Grocery List Title</h1>
+<hr>
+{% if titles %}
+      {% for title in titles %}
+          <a href = "../deleteGroceryTitle/{{title.groceryListId.id}}">GroceryList Name -- {{title.groceryListId}}</a></br>
+      {% endfor %}
+{% endif %}
+<br></br>
+<button><a href="../createTitle">Cancel</a></button>
+</form>
+
+{% endblock %}
