@@ -2,19 +2,13 @@
 
 Distributed Grocery list
 
-Sign up and login
-
-After login user will create grocery list and add different user to edit or view or both. 
-
-Ui:
-First login and then,
-Three part. 
-	1.	All different type of grocery list
-	2.	Blank page
-	3.	Blank
-
-Forget password: question answer
-Change Password : 
+UI:
+	1. SignUp
+	2. Login
+	3. Welcome Page (login required)
+	4. create Grocery Title
+	5. create Content in the Grocery
+	6. Other can also share it to whom creator or admin share the list. 
 
 If user click on any grocery list, then on second page the content of list will display and on third page the other users detail will display with the authority. 
 
@@ -38,7 +32,7 @@ Method:
 
 Require: python and django for backend, basic HTML in frontend. 
 
-Validation : 
+Validation (still need to be implemented) : 
 	1.	Unique email
 	2.	Password will be complex
 	3.	Every 30 days password need to be change
