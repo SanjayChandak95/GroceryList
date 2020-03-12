@@ -93,7 +93,7 @@ def groceryContent_view(request,id):
         if len(contents) == 0 :
             contents = None
         grocerListContentForm = GrocerListContentForm()
-        return render(request,"groceryContent.html",{'usersAndGroceryForm':usersAndGroceryForm,'IsUserAdmin':IsUserAdmin,'shared_users':shared_users,'titles':titles,'id':id,'grocerListContentForm':grocerListContentForm,'contents':contents,'glist':grocery_id})
+        return render(request,"groceryContent.html",{'canEdit':canEdit,'usersAndGroceryForm':usersAndGroceryForm,'IsUserAdmin':IsUserAdmin,'shared_users':shared_users,'titles':titles,'id':id,'grocerListContentForm':grocerListContentForm,'contents':contents,'glist':grocery_id})
     else:
         return HttpResponseRedirect("../welcome")
 
@@ -115,7 +115,7 @@ def deleteSharedUser_view(request,id):
     return HttpResponseRedirect('../../groceryTitle/'+str(groceryList_id))
 
 def newSharedUser_view(request,id):
-    groceryListId = UsersAndGrocery.objects.get(id = id).groceryListId
+    groceryListId = GroceryList.objects.get(id = id)
     usersAndGroceryForm = UsersAndGroceryForm()
     if request.method =="POST":
         usersAndGroceryForm = UsersAndGroceryForm(request.POST)
