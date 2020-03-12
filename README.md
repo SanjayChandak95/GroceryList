@@ -9,6 +9,7 @@ UI:
 	4. create Grocery Title
 	5. create Content in the Grocery
 	6. Other can also share it to whom creator or admin share the list. 
+	(Refer Output Screen Folder for browser data)
 
 If user click on any grocery list, then on second page the content of list will display and on third page the other users detail will display with the authority. 
 
