@@ -14,22 +14,46 @@
 {% endblock %}
 
 {% block div2 %}
-
-<form action = "../groceryTitle/{{id}}" method="post">
-  {% csrf_token %}
 <h1>Content in Grocery List {{glist}}</h1>
 <hr>
 {% if contents != None %}
       {% for content in contents %}
           <p>{{content.item}}
+            {% if canEdit %}
             <button><a href = "../deleteGroceryContent/{{content.id}}">Delete</a></button>
+            {% endif %}
           </p>
       {% endfor %}
 {% endif %}
 
+{% if canEdit %}
+<form action = "../groceryTitle/{{id}}" method="post">
+  {% csrf_token %}
 {{grocerListContentForm.as_p}}
 <button type = "submit">Submit</button>
 <button type = "reset">Reset</button>
 </form>
+{% endif %}
+{% endblock %}
 
+{% block div3 %}
+<h1>Shared User for Grocery List {{glist}}</h1>
+<hr>
+{% if shared_users != None  %}
+      {% for shared_user in shared_users %}
+          <p>{{shared_user.userId}}
+            {% if IsUserAdmin %}
+            <button><a href = "../deletesharedUser/{{shared_user.id}}">Delete</a></button>
+            {% endif %}
+          </p>
+      {% endfor %}
+{% endif %}
+{% if IsUserAdmin %}
+<form action = "../newSharedUser/{{id}}" method="post">
+  {% csrf_token %}
+{{usersAndGroceryForm.as_p}}
+<button type = "submit">Add User</button>
+<button type = "reset">Reset</button>
+</form>
+{% endif %}
 {% endblock %}

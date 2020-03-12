@@ -29,4 +29,6 @@ urlpatterns = [
     #path('deleteGroceryTitleForm',views.deleteTitles_view,name='GroceryContent_View'),
     path('deleteGroceryTitle/<int:id>',views.deleteTitle_view,name='DeleteGroceryTitle_View'),
     path('deleteGroceryContent/<int:id>',views.deleteContent_view,name='DeleteGroceryContent_View'),
+    path('deletesharedUser/<int:id>',views.deleteSharedUser_view,name='deleteSharedUser_View'),
+    path('newSharedUser/<int:id>',views.newSharedUser_view,name='newSharedUser_View')
 ]

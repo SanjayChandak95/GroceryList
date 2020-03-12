@@ -70,27 +70,36 @@ def title_view(request,*args,**kwargs):
 def groceryContent_view(request,id):
     if "user" in request.COOKIES:
         grocerListContentForm = GrocerListContentForm()
+        usersAndGroceryForm = UsersAndGroceryForm()
+
         email = request.COOKIES["user"]
         user = User.objects.filter(email = email).first()
-        titles = UsersAndGrocery.objects.filter(userId = user).all()
+        temp_userAndGrocery =  UsersAndGrocery.objects.filter(userId = user)
+        titles = temp_userAndGrocery.all()
         grocery_id = GroceryList.objects.get(id = id)
+
+        shared_users = UsersAndGrocery.objects.filter(groceryListId = grocery_id).exclude(userId = user).all()
+        IsUserAdmin = temp_userAndGrocery.filter(groceryListId = grocery_id).first().isAdmin
+        canEdit = temp_userAndGrocery.filter(groceryListId = grocery_id).first().canEdit
+
+        if len(shared_users) == 0:
+            shared_users = None
         if request.method == "POST":
+            print(request.POST)
             grocerListContentForm = GrocerListContentForm(request.POST)
             if grocerListContentForm.is_valid():
                 GrocerListContent.objects.create(item = grocerListContentForm.cleaned_data['item'],groceryListId = grocery_id )
-
         contents = GrocerListContent.objects.filter(groceryListId = grocery_id).all()
         if len(contents) == 0 :
             contents = None
         grocerListContentForm = GrocerListContentForm()
-        return render(request,"groceryContent.html",{'titles':titles,'id':id,'grocerListContentForm':grocerListContentForm,'contents':contents,'glist':grocery_id})
+        return render(request,"groceryContent.html",{'usersAndGroceryForm':usersAndGroceryForm,'IsUserAdmin':IsUserAdmin,'shared_users':shared_users,'titles':titles,'id':id,'grocerListContentForm':grocerListContentForm,'contents':contents,'glist':grocery_id})
     else:
         return HttpResponseRedirect("../welcome")
 
 def deleteTitle_view(request,id):
     r = GroceryList.objects.get(id = id)
     r.delete()
-
     return HttpResponseRedirect('../../createTitle')
 
 def deleteContent_view(request,id):
@@ -98,6 +107,24 @@ def deleteContent_view(request,id):
     groceryList_id = r.groceryListId.id
     r.delete()
     return HttpResponseRedirect('../../groceryTitle/'+str(groceryList_id))
+
+def deleteSharedUser_view(request,id):
+    r = UsersAndGrocery.objects.get(id = id)
+    groceryList_id = r.groceryListId.id
+    r.delete()
+    return HttpResponseRedirect('../../groceryTitle/'+str(groceryList_id))
+
+def newSharedUser_view(request,id):
+    groceryListId = UsersAndGrocery.objects.get(id = id).groceryListId
+    usersAndGroceryForm = UsersAndGroceryForm()
+    if request.method =="POST":
+        usersAndGroceryForm = UsersAndGroceryForm(request.POST)
+        if usersAndGroceryForm.is_valid():
+                user = usersAndGroceryForm.cleaned_data["userId"]
+                canEdit = usersAndGroceryForm.cleaned_data["canEdit"]
+                isAdmin = usersAndGroceryForm.cleaned_data["isAdmin"]
+                UsersAndGrocery.objects.create(groceryListId = groceryListId,userId=user,canEdit=canEdit,canView=True,isAdmin=isAdmin,isCreator=False)
+    return HttpResponseRedirect('../../groceryTitle/'+str(groceryListId.id))
 
 def logout_view(request,*args,**kwargs):
     response = HttpResponseRedirect("../welcome")

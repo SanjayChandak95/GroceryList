@@ -1,5 +1,5 @@
 from django import forms
-from .models import User,GroceryList,GrocerListContent
+from .models import User,GroceryList,GrocerListContent,UsersAndGrocery
 
 class SignUpForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput)
@@ -50,3 +50,13 @@ class GrocerListContentForm(forms.ModelForm):
     class Meta:
         model = GrocerListContent
         fields=['item']
+
+class UsersAndGroceryForm(forms.ModelForm):
+    class Meta:
+        model = UsersAndGrocery
+        fields = ['userId','canEdit','isAdmin']
+    def clean_userExist(self,*args,**kwargs):
+        email = self.cleaned_data["userId"].email
+        if len(User.objects.filter(email = email))>0:
+            return email
+        return  forms.ValidationError("Email does not exist!")
