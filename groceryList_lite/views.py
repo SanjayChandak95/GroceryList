@@ -5,7 +5,7 @@ from django.contrib import messages
 # Create your views here.
 from .models import *
 from .forms import *
-#from validation.EmailValidation import *
+from .validation.EmailValidation import *
 
 def signUp_view(request,*args,**kwargs):
     if "user" in request.COOKIES:
