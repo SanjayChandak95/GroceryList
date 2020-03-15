@@ -8,6 +8,7 @@ from .forms import *
 from .validation.EmailValidation import *
 
 def signUp_view(request,*args,**kwargs):
+    signUp = SignUpForm()
     if "user" in request.COOKIES:
         response = HttpResponseRedirect("../signUp")
         response.delete_cookie('user')
@@ -19,7 +20,7 @@ def signUp_view(request,*args,**kwargs):
             return HttpResponseRedirect("../login")
         else:
             messages.error(request,"Error")
-    signUp = SignUpForm()
+    #signUp = SignUpForm()
     return render(request,"signUpForm.html",{'signUp' : signUp})
 
 def login_view(request,*args,**kwargs):

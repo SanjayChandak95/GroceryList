@@ -1,5 +1,6 @@
 from django import forms
-def uniqueEmail(testEmail,userObj):
-    if len(userObj.filter(email = email)) > 0:
-        return False
-    return True
+from ..models import User
+def uniqueEmail(email):
+    if len(User.objects.filter(email = email)) > 0:
+        raise forms.ValidationError("Email should be unique")
+    return email

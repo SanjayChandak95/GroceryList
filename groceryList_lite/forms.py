@@ -1,5 +1,6 @@
 from django import forms
 from .models import User,GroceryList,GrocerListContent,UsersAndGrocery
+from .validation import EmailValidation
 
 class SignUpForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput)
@@ -13,10 +14,13 @@ class SignUpForm(forms.ModelForm):
         ]
     def clean_email(self,*args,**kwargs):
         email = self.cleaned_data["email"]
+        EmailValidation.uniqueEmail(email)
+        return email
+        '''
         if len(User.objects.filter(email = email)) > 0:
             raise forms.ValidationError("Email should be unique")
         else:
-            return email
+            return email'''
 
 class LoginForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput)
