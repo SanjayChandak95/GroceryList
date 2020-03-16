@@ -58,9 +58,10 @@ def title_view(request,*args,**kwargs):
         if request.method == "POST":
             groceryList = GroceryListForm(request.POST)
             if groceryList.is_valid():
-                GroceryList.objects.create(title = groceryList.cleaned_data['title'],email = email)
-                groceryList_id = GroceryList.objects.filter(title = groceryList.cleaned_data['title']).filter(email = email).first()
-                UsersAndGrocery.objects.create(groceryListId = groceryList_id,userId = user,canEdit = True,canView = True,isAdmin = True,isCreator = True)
+                instanceGrocery = GroceryList(title = groceryList.cleaned_data['title'],email = email)
+                instanceGrocery.save()
+                #groceryList_id = GroceryList.objects.filter(title = groceryList.cleaned_data['title']).filter(email = email).first()
+                UsersAndGrocery.objects.create(groceryListId = instanceGrocery,userId = user,canEdit = True,canView = True,isAdmin = True,isCreator = True)
 
                 #return render(request,"createGroceryListTitle.html",{'titles' : titles,'groceryList':groceryList})
         return render(request,"createGroceryListTitle.html",{'titles' : titles,'groceryList':groceryList})
