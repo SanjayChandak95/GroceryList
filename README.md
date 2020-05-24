@@ -9,11 +9,11 @@
 
 <h3>UI:</h3>
 <ol>
-	<li> <img src = "https://github.com/SanjayChandak95/GroceryList/blob/master/Output_Screen/SignUp.PNG"> <br>SignUp </li>
-	<li> <img src = "https://github.com/SanjayChandak95/GroceryList/blob/master/Output_Screen/Login.PNG"><br>Login 	</li>
-	<li> <img src = "https://github.com/SanjayChandak95/GroceryList/blob/master/Output_Screen/Welcome.PNG"><br>Welcome Page</li>
-	<li> <img src = "https://github.com/SanjayChandak95/GroceryList/blob/master/Output_Screen/create_new_grocery_list_title.PNG"><br>create Grocery Title	</li>
-	<li> <img src = "https://github.com/SanjayChandak95/GroceryList/blob/master/Output_Screen/Application_page.PNG"><br>create Content in the Grocery and share it with other</li>
+	<li> <br>SignUp <br><img src = "https://github.com/SanjayChandak95/GroceryList/blob/master/Output_Screen/SignUp.PNG">  </li>
+	<li> <br>Login<br><img src = "https://github.com/SanjayChandak95/GroceryList/blob/master/Output_Screen/Login.PNG"> 	</li>
+	<li> <br>Welcome Page<br><img src = "https://github.com/SanjayChandak95/GroceryList/blob/master/Output_Screen/Welcome.PNG"></li>
+	<li> <br>create Grocery Title<br><img src = "https://github.com/SanjayChandak95/GroceryList/blob/master/Output_Screen/create_new_grocery_list_title.PNG"></li>
+	<li> <br>create Content in the Grocery and share it with other<br><img src = "https://github.com/SanjayChandak95/GroceryList/blob/master/Output_Screen/Application_page.PNG"></li>
 </ol>
 If user click on any grocery list, then on second page the content of list will display and on third page the other users detail will display with the authority. 
 
