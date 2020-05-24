@@ -12,7 +12,7 @@
 	<li> <img src = "https://github.com/SanjayChandak95/GroceryList/blob/master/Output_Screen/SignUp.PNG"> <br>SignUp </li>
 	<li> <img src = "https://github.com/SanjayChandak95/GroceryList/blob/master/Output_Screen/Login.PNG"><br>Login 	</li>
 	<li> <img src = "https://github.com/SanjayChandak95/GroceryList/blob/master/Output_Screen/Welcome.PNG"><br>Welcome Page</li>
-	<li> <img src = "https://github.com/SanjayChandak95/GroceryList/blob/master/Output_Screen/Application_page.PNG"><br>create Grocery Title	</li>
+	<li> <img src = "https://github.com/SanjayChandak95/GroceryList/blob/master/Output_Screen/create_new_grocery_list_title.PNG"><br>create Grocery Title	</li>
 	<li> <img src = "https://github.com/SanjayChandak95/GroceryList/blob/master/Output_Screen/Application_page.PNG"><br>create Content in the Grocery and share it with other</li>
 </ol>
 If user click on any grocery list, then on second page the content of list will display and on third page the other users detail will display with the authority. 
