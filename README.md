@@ -1,9 +1,9 @@
 # GroceryList
 
-Distributed Grocery list
+<h2>Distributed Grocery list</h2>
 
-UI:
-	1. SignUp
+<h3>UI:</h3>
+	1. SignUp <br>
 	2. Login
 	3. Welcome Page (login required)
 	4. create Grocery Title
