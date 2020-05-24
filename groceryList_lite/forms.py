@@ -1,6 +1,6 @@
 from django import forms
 from .models import User,GroceryList,GrocerListContent,UsersAndGrocery
-from .validation import EmailValidation
+from .validation2 import EmailValidation,randomStringGenertor,verificationMail
 
 class SignUpForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput)

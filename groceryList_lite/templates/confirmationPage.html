@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block div2 %}
+{{msg}}
+<p> We have sent a verification mail to your email </p>
+
+<a href = "../login"">Continue</a>
+
+<script>
+  {% if messages %}
+        {% for message in messages %}
+            alert(message)
+        {% endfor %}
+  {% endif %}
+</script>
+{% endblock %}

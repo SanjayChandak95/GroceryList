@@ -5,7 +5,12 @@ from django.contrib import messages
 # Create your views here.
 from .models import *
 from .forms import *
-from .validation.EmailValidation import *
+#from .validation.EmailValidation import *
+from .validation2 import EmailValidation,randomStringGenertor,verificationMail
+#adding
+from django.utils.crypto import get_random_string
+from django.core.mail import send_mail
+from groceryList.settings import EMAIL_HOST_USER
 
 def signUp_view(request,*args,**kwargs):
     signUp = SignUpForm()
@@ -16,12 +21,39 @@ def signUp_view(request,*args,**kwargs):
     if request.method == "POST":
         signUp = SignUpForm(request.POST)
         if signUp.is_valid():
-            signUp.save()
-            return HttpResponseRedirect("../login")
+            #signUp.save()
+            #return HttpResponseRedirect("../login")
+
+            email = signUp.cleaned_data["email"]
+            password = signUp.cleaned_data["password"]
+            securityQuestion = signUp.cleaned_data["securityQuestion"]
+            securityQuesAnswer = signUp.cleaned_data["securityQuesAnswer"]
+            auth = False
+            
+            confirmationLink = randomStringGenertor.generate()
+            verificationMail.sentmail(email,confirmationLink)
+            User.objects.create(email = email , password = password, securityQuestion = securityQuestion , securityQuesAnswer = securityQuesAnswer, auth = auth, confirmationLink = confirmationLink)
+            return render(request,"confirmationPage.html",{})
         else:
             messages.error(request,"Error")
     #signUp = SignUpForm()
     return render(request,"signUpForm.html",{'signUp' : signUp})
+
+def confirmation(request,confirmationLink):
+    #print("hhh",confirmationLink)
+    #print(request.GET)
+    #print(request.POST)
+    email, link = confirmationLink.split("+")
+    user = User.objects.filter(email = email).filter(confirmationLink = link)
+    if len(user)==1:
+        u = user.first()
+        u.confirmationLink = ""
+        u.auth = True
+        u.save()
+
+    return HttpResponseRedirect("../login")
+
+
 
 def login_view(request,*args,**kwargs):
     if "user" in request.COOKIES:
@@ -34,7 +66,7 @@ def login_view(request,*args,**kwargs):
             email = login.cleaned_data['email']
             pwd = login.cleaned_data['password']
             validUser = User.objects.filter(email = email).filter(password = pwd)
-            if len(validUser) == 1:
+            if len(validUser) == 1 and validUser.first().auth == True:
                 #need session to check from now that user have logged in
                 response = HttpResponseRedirect("../welcome")
                 response.set_cookie('user',email)

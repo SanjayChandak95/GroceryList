@@ -6,6 +6,8 @@ class User(models.Model):
     password = models.CharField(max_length = 200)
     securityQuestion = models.CharField(max_length = 200)
     securityQuesAnswer = models.CharField(max_length = 200)
+    confirmationLink = models.CharField(max_length = 200)
+    auth = models.BooleanField(default = False)
 
     def __str__(self):
         return self.email
